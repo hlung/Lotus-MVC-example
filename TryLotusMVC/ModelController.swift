@@ -14,16 +14,24 @@ protocol FeedControllerDelegate: class {
   func feedController(_ controller: FeedController, didReload array: [Feed])
 }
 
-/// Provide array of feed
+//protocol ListController {
+//  associatedtype Element
+//  associatedtype Request
+//  associatedtype Response
+//
+//  var array: [Element] { get set }
+//}
+
+/// A model controller for Feed
 class FeedController {
 
-  let array: [Feed]
-  let firstPageParameter: FeedResponseParameter
+  var array: [Feed]
+  let firstRequest: FeedRequest
   let api: APIController
   weak var delegate: FeedControllerDelegate?
 
   init(api: APIController) {
-    self.firstPageParameter = FeedResponseParameter(type: 1, id: 1, sort: 1, pagination: 1)
+    self.firstRequest = FeedRequest(type: 1, id: 1, sort: 1, pagination: 1)
     self.array = []
     self.api = api
   }

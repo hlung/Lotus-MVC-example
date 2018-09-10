@@ -1,8 +1,12 @@
 import Foundation
 
-enum APIResponse<T> {
+enum Result<T> {
   case success(T)
   case error(Error)
+}
+
+protocol APIResponse {
+  associatedtype Element
 }
 
 //protocol APIRequest {
@@ -11,15 +15,17 @@ enum APIResponse<T> {
 //}
 
 class APIController {
-  func send(request: URLRequest, completion: @escaping ((APIResponse<Data>) -> Void)) {
+  func send(request: URLRequest, completion: @escaping ((Result<Data?>) -> Void)) {
     let urlSession = URLSession()
     let task = urlSession.dataTask(with: request) { (data, response, error) in
-      if let data = data {
-        completion(.success(data))
-      } else {
-        // parse error
-        completion(.error(error ?? NSError(domain: "com.myapp", code: 0, userInfo: nil)))
+      if let error = error {
+        completion(.error(error))
       }
+
+      // TODO: check response code
+      // completion(.error(NSError(domain: "com.myapp", code: 0, userInfo: nil)))
+
+      completion(.success(data))
     }
     task.resume()
   }

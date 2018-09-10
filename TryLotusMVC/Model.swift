@@ -21,7 +21,7 @@ protocol Pageable {
   var pagination: Int { get set }
 }
 
-struct FeedResponseParameter: Pageable {
+struct FeedRequest: Pageable {
   let type: Int
   let id: Int
   let sort: Int
