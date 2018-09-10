@@ -18,6 +18,7 @@
 		01A25B3421465677001F86E7 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A25B3321465677001F86E7 /* ModelController.swift */; };
 		01A25B3621465680001F86E7 /* SharedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A25B3521465680001F86E7 /* SharedController.swift */; };
 		01A25B3821466A81001F86E7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A25B3721466A81001F86E7 /* ViewModel.swift */; };
+		01A25B3A21467834001F86E7 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A25B3921467834001F86E7 /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		01A25B3321465677001F86E7 /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		01A25B3521465680001F86E7 /* SharedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedController.swift; sourceTree = "<group>"; };
 		01A25B3721466A81001F86E7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		01A25B3921467834001F86E7 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				01A25B0F21464C5A001F86E7 /* AppDelegate.swift */,
 				01A25B2F21465529001F86E7 /* AppCoordinator.swift */,
 				01A25B1121464C5A001F86E7 /* ViewController.swift */,
+				01A25B3921467834001F86E7 /* View.swift */,
 				01A25B3121465663001F86E7 /* Model.swift */,
 				01A25B3721466A81001F86E7 /* ViewModel.swift */,
 				01A25B3321465677001F86E7 /* ModelController.swift */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A25B3A21467834001F86E7 /* View.swift in Sources */,
 				01A25B3621465680001F86E7 /* SharedController.swift in Sources */,
 				01A25B3021465529001F86E7 /* AppCoordinator.swift in Sources */,
 				01A25B3421465677001F86E7 /* ModelController.swift in Sources */,

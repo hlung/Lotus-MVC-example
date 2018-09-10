@@ -25,14 +25,44 @@ class APIController {
   }
 }
 
+// MARK: -
+
+protocol ActionControllerReactionDelegate: class {
+  func actionController(_ controller: ActionController, didUpdate reaction: Int)
+}
+
 class ActionController {
 
-  func receive(reaction: Int) {
+  // Output
+  // TODO: need to multicast (e.g. // pod 'MulticastDelegateSwift')
+  // may need multiple delegates because swift protocol func is not optional
+  weak var reactionDelegate: ActionControllerReactionDelegate?
 
+  func receive(reaction: Int) {
+    reactionDelegate?.actionController(self, didUpdate: 1)
   }
 
   func receive(follow: Int) {
-
+    //
   }
 
 }
+
+// MARK: -
+
+protocol SessionControllerDelegate: class {
+  func sessionControllerDidUpdate(_ controller: SessionController)
+}
+
+class SessionController {
+  var token: String = "" {
+    didSet {
+      // save token
+    }
+  }
+
+  init() {
+    // read saved token
+  }
+}
+

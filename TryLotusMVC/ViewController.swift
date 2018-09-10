@@ -23,6 +23,7 @@ class FeedViewController: UIViewController {
   init(coordinator: AppCoordinator) {
     self.feedController = FeedController(api: coordinator.api)
     super.init(nibName: nil, bundle: nil)
+    //coordinator.actionController.reactionDelegate += self
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -43,19 +44,32 @@ class FeedViewController: UIViewController {
 
 }
 
+extension FeedViewController: FeedCellDelegate {
+  func feedCell(_ cell: FeedCell, didReceive reaction: Int) {
+    feedController.update(with: reaction)
+  }
+}
+
 extension FeedViewController: FeedControllerDelegate {
-  func feedController(controller: FeedController, isReloading: Bool) {
+  func feedController(_ controller: FeedController, isReloading: Bool) {
     // update spinner
   }
 
-  func feedController(controller: FeedController, didFailReloadWith error: Error) {
+  func feedController(_ controller: FeedController, didFailReloadWith error: Error) {
     // append error cell on top
     feedViewModel.reloadError = error
   }
 
-  func feedController(controller: FeedController, didReload array: [Feed]) {
+  func feedController(_ controller: FeedController, didReload array: [Feed]) {
     // update table
     feedViewModel.reloadError = nil
     feedViewModel.array = array
   }
 }
+
+extension FeedViewController: ActionControllerReactionDelegate {
+  func actionController(_ controller: ActionController, didUpdate reaction: Int) {
+    feedController.update(with: reaction)
+  }
+}
+
