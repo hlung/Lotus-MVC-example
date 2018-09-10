@@ -58,7 +58,7 @@ class FeedController {
         // all went well, nothing more to do because UI was already updated
         break
       case .error/*(let error)*/:
-        weakSelf.receive(reaction: reaction.undone)
+        weakSelf.receive(reaction: reaction.reversed)
       }
       weakSelf.delegate?.feedController(weakSelf, isReloading: false)
     }

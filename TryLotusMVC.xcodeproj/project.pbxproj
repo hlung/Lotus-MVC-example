@@ -97,6 +97,7 @@
 				01A25B3721466A81001F86E7 /* ViewModel.swift */,
 				01A25B3321465677001F86E7 /* ModelController.swift */,
 				01A25B3521465680001F86E7 /* SharedController.swift */,
+				01A25B3B2146C770001F86E7 /* SharedControllers */,
 				01A25B1321464C5A001F86E7 /* Main.storyboard */,
 				01A25B1621464C5D001F86E7 /* Assets.xcassets */,
 				01A25B1821464C5D001F86E7 /* LaunchScreen.storyboard */,
@@ -112,6 +113,13 @@
 				01A25B2621464C5D001F86E7 /* Info.plist */,
 			);
 			path = TryLotusMVCTests;
+			sourceTree = "<group>";
+		};
+		01A25B3B2146C770001F86E7 /* SharedControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SharedControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

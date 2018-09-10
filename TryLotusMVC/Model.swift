@@ -7,7 +7,7 @@ struct Reaction {
   let type: String
   let isOn: Bool
 
-  var undone: Reaction {
+  var reversed: Reaction {
     return Reaction(type: type, isOn: !isOn)
   }
 }
