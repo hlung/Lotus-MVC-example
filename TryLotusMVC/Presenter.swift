@@ -1,14 +1,14 @@
 import UIKit
 
-protocol FeedTableViewModelDelegate: class {
-  func feedTableViewModel(_ viewModel: FeedTableViewModel, didSelect feed: Feed)
-  func feedTableViewModel(_ viewModel: FeedTableViewModel, didReceive reaction: Reaction)
+protocol FeedListPresenterDelegate: class {
+  func feedListPresenter(_ presenter: FeedListPresenter, didSelect feed: Feed)
+  func feedListPresenter(_ presenter: FeedListPresenter, didReceive reaction: Reaction)
 }
 
-class FeedTableViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
+class FeedListPresenter: NSObject, UITableViewDataSource, UITableViewDelegate {
 
   let tableView: UITableView
-  weak var delegate: FeedTableViewModelDelegate?
+  weak var delegate: FeedListPresenterDelegate?
 
   init(tableView: UITableView) {
     self.tableView = tableView
@@ -54,13 +54,13 @@ class FeedTableViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    delegate?.feedTableViewModel(self, didSelect: array[indexPath.row])
+    delegate?.feedListPresenter(self, didSelect: array[indexPath.row])
   }
 }
 
-extension FeedTableViewModel: FeedCellDelegate {
+extension FeedListPresenter: FeedCellDelegate {
   func feedCell(_ cell: FeedCell, didToggleReaction on: Bool) {
     let reaction = Reaction(type: "heart", isOn: on)
-    delegate?.feedTableViewModel(self, didReceive: reaction)
+    delegate?.feedListPresenter(self, didReceive: reaction)
   }
 }

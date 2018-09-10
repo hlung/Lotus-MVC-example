@@ -13,8 +13,8 @@ class FeedViewController: UIViewController {
   let coordinator: AppCoordinator
   let feedController: FeedController
 
-  lazy var feedViewModel: FeedViewModel = {
-    return FeedViewModel(tableView: self.tableView)
+  lazy var feedTableViewModel: FeedTableViewModel = {
+    return FeedTableViewModel(tableView: self.tableView)
   }()
 
   lazy var tableView: UITableView = {
@@ -47,12 +47,12 @@ class FeedViewController: UIViewController {
 
 }
 
-extension FeedViewController: FeedViewModelDelegate {
-  func feedViewModel(_ viewModel: FeedViewModel, didSelect feed: Feed) {
+extension FeedViewController: FeedTableViewModelDelegate {
+  func feedTableViewModel(_ viewModel: FeedTableViewModel, didSelect feed: Feed) {
     coordinator.navigate(to: Navigation.feedDetail(feed))
   }
 
-  func feedViewModel(_ viewModel: FeedViewModel, didReceive reaction: Reaction) {
+  func feedTableViewModel(_ viewModel: FeedTableViewModel, didReceive reaction: Reaction) {
     feedController.send(reaction: reaction)
   }
 }
@@ -63,21 +63,21 @@ extension FeedViewController: FeedControllerDelegate {
   }
 
   func feedController(_ controller: FeedController, didFailReloadWith error: Error) {
-    feedViewModel.reloadError = error
+    feedTableViewModel.reloadError = error
   }
 
   func feedController(_ controller: FeedController, isLoadingMore: Bool) {
-    feedViewModel.isLoadingMore = isLoadingMore
+    feedTableViewModel.isLoadingMore = isLoadingMore
   }
 
   func feedController(_ controller: FeedController, didFailLoadMoreWith error: Error) {
-    feedViewModel.loadMoreError = error
+    feedTableViewModel.loadMoreError = error
   }
 
   func feedController(_ controller: FeedController, didReload array: [Feed]) {
     // update table
-    feedViewModel.reloadError = nil
-    feedViewModel.array = array
+    feedTableViewModel.reloadError = nil
+    feedTableViewModel.array = array
   }
 }
 
