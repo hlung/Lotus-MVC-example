@@ -59,12 +59,19 @@ extension FeedViewController: FeedViewModelDelegate {
 
 extension FeedViewController: FeedControllerDelegate {
   func feedController(_ controller: FeedController, isReloading: Bool) {
-    // update spinner
+    // update activity indicator
   }
 
   func feedController(_ controller: FeedController, didFailReloadWith error: Error) {
-    // append error cell on top
     feedViewModel.reloadError = error
+  }
+
+  func feedController(_ controller: FeedController, isLoadingMore: Bool) {
+    feedViewModel.isLoadingMore = isLoadingMore
+  }
+
+  func feedController(_ controller: FeedController, didFailLoadMoreWith error: Error) {
+    feedViewModel.loadMoreError = error
   }
 
   func feedController(_ controller: FeedController, didReload array: [Feed]) {

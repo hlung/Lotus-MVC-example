@@ -26,7 +26,19 @@ class FeedViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
 
   var reloadError: Error? = nil {
     didSet {
-      tableView.reloadData()
+      // append error cell at top
+    }
+  }
+
+  var loadMoreError: Error? = nil {
+    didSet {
+      // append error cell at bottom
+    }
+  }
+
+  var isLoadingMore: Bool = false {
+    didSet {
+      // append loading cell at bottom
     }
   }
 

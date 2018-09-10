@@ -11,6 +11,10 @@ import Foundation
 protocol FeedControllerDelegate: class {
   func feedController(_ controller: FeedController, isReloading: Bool)
   func feedController(_ controller: FeedController, didFailReloadWith error: Error)
+
+  func feedController(_ controller: FeedController, isLoadingMore: Bool)
+  func feedController(_ controller: FeedController, didFailLoadMoreWith error: Error)
+
   func feedController(_ controller: FeedController, didReload array: [Feed])
 }
 
@@ -27,6 +31,7 @@ class FeedController {
 
   var array: [Feed]
   let firstRequest: FeedRequest
+  let nextRequest: FeedRequest? = nil
   let api: APIController
   weak var delegate: FeedControllerDelegate?
 
@@ -82,7 +87,8 @@ class FeedController {
 
       switch response {
       case .success/*(let data)*/:
-        // parse data and set to array
+        let newArray = [Feed]() // TODO: parse data
+        weakSelf.array = newArray
         weakSelf.delegate?.feedController(weakSelf, didReload: weakSelf.array)
       case .error(let error):
         weakSelf.delegate?.feedController(weakSelf, didFailReloadWith: error)
@@ -91,8 +97,23 @@ class FeedController {
     }
   }
 
-//  func loadMore() {
-//
-//  }
+  func loadMore() {
+    delegate?.feedController(self, isLoadingMore: true)
+
+    let request = URLRequest(url: URL(string: "www.myapp.com/feed.json")!)
+    self.api.send(request: request) { [weak self] (response) in
+      guard let weakSelf = self else { return }
+
+      switch response {
+      case .success/*(let data)*/:
+        let newArray = [Feed]() // TODO: parse data
+        weakSelf.array.append(contentsOf: newArray)
+        weakSelf.delegate?.feedController(weakSelf, didReload: weakSelf.array)
+      case .error(let error):
+        weakSelf.delegate?.feedController(weakSelf, didFailLoadMoreWith: error)
+      }
+      weakSelf.delegate?.feedController(weakSelf, isLoadingMore: false)
+    }
+  }
 
 }
