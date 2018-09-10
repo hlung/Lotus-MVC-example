@@ -14,6 +14,7 @@ class FeedViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
     self.tableView = tableView
     super.init()
     tableView.register(FeedCell.self, forCellReuseIdentifier: "cell")
+    // TODO: register loading, error, and other types of cell
     tableView.dataSource = self
     tableView.delegate = self
   }
@@ -26,19 +27,19 @@ class FeedViewModel: NSObject, UITableViewDataSource, UITableViewDelegate {
 
   var reloadError: Error? = nil {
     didSet {
-      // append error cell at top
+      // TODO: append error cell at top
     }
   }
 
   var loadMoreError: Error? = nil {
     didSet {
-      // append error cell at bottom
+      // TODO: append error cell at bottom
     }
   }
 
   var isLoadingMore: Bool = false {
     didSet {
-      // append loading cell at bottom
+      // TODO: append loading cell at bottom
     }
   }
 
