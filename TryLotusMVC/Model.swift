@@ -3,6 +3,15 @@
 
 import Foundation
 
+struct Reaction {
+  let type: String
+  let isOn: Bool
+
+  var undone: Reaction {
+    return Reaction(type: type, isOn: !isOn)
+  }
+}
+
 struct Feed {
   let id: String
   let title: String

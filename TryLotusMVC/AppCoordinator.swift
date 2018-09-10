@@ -10,17 +10,19 @@ class AppCoordinator {
   init() {
     api = APIController()
     actionController = ActionController()
-    navigationController = UINavigationController(rootViewController: UIViewController())
-
+    navigationController = UINavigationController()
     window = UIWindow()
+
+    let firstViewController = FeedViewController(coordinator: self)
+    navigationController.setViewControllers([firstViewController], animated: false)
     window.rootViewController = navigationController
     window.makeKeyAndVisible()
   }
 
   func navigate(to destination: Navigation) {
     switch destination {
-    case .feed:
-      let viewController = FeedViewController(coordinator: self)
+    case .feedDetail:
+      let viewController = FeedDetailViewController(coordinator: self)
       navigationController.pushViewController(viewController, animated: true)
     }
   }
@@ -28,5 +30,5 @@ class AppCoordinator {
 }
 
 enum Navigation {
-  case feed
+  case feedDetail(Feed)
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
+  let coordinator: AppCoordinator
   let feedController: FeedController
 
   lazy var feedViewModel: FeedViewModel = {
@@ -17,10 +18,12 @@ class FeedViewController: UIViewController {
   }()
 
   lazy var tableView: UITableView = {
-    return UITableView()
+    let tableView = UITableView()
+    return tableView
   }()
 
   init(coordinator: AppCoordinator) {
+    self.coordinator = coordinator
     self.feedController = FeedController(api: coordinator.api)
     super.init(nibName: nil, bundle: nil)
     //coordinator.actionController.reactionDelegate += self
@@ -44,9 +47,13 @@ class FeedViewController: UIViewController {
 
 }
 
-extension FeedViewController: FeedCellDelegate {
-  func feedCell(_ cell: FeedCell, didReceive reaction: Int) {
-    feedController.update(with: reaction)
+extension FeedViewController: FeedViewModelDelegate {
+  func feedViewModel(_ viewModel: FeedViewModel, didSelect feed: Feed) {
+    coordinator.navigate(to: Navigation.feedDetail(feed))
+  }
+
+  func feedViewModel(_ viewModel: FeedViewModel, didReceive reaction: Reaction) {
+    feedController.send(reaction: reaction)
   }
 }
 
@@ -68,8 +75,23 @@ extension FeedViewController: FeedControllerDelegate {
 }
 
 extension FeedViewController: ActionControllerReactionDelegate {
-  func actionController(_ controller: ActionController, didUpdate reaction: Int) {
-    feedController.update(with: reaction)
+  func actionController(_ controller: ActionController, didUpdate reaction: Reaction) {
+    feedController.receive(reaction: reaction)
   }
 }
 
+
+class FeedDetailViewController: UIViewController {
+
+  let coordinator: AppCoordinator
+
+  init(coordinator: AppCoordinator) {
+    self.coordinator = coordinator
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+}

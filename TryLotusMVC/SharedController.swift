@@ -28,7 +28,7 @@ class APIController {
 // MARK: -
 
 protocol ActionControllerReactionDelegate: class {
-  func actionController(_ controller: ActionController, didUpdate reaction: Int)
+  func actionController(_ controller: ActionController, didUpdate reaction: Reaction)
 }
 
 class ActionController {
@@ -38,13 +38,12 @@ class ActionController {
   // may need multiple delegates because swift protocol func is not optional
   weak var reactionDelegate: ActionControllerReactionDelegate?
 
-  func receive(reaction: Int) {
-    reactionDelegate?.actionController(self, didUpdate: 1)
+  func receive(reaction: Reaction) {
+    reactionDelegate?.actionController(self, didUpdate: reaction)
   }
 
-  func receive(follow: Int) {
-    //
-  }
+//  func receive(follow: Int) {
+//  }
 
 }
 
