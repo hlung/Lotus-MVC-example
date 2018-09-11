@@ -49,11 +49,13 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: FeedTableViewModelDelegate {
   func feedTableViewModel(_ viewModel: FeedTableViewModel, didSelect feed: Feed) {
-    coordinator.navigate(to: Navigation.feedDetail(feed))
+    coordinator.navigate(to: .feedDetail(feed))
   }
 
   func feedTableViewModel(_ viewModel: FeedTableViewModel, didReceive reaction: Reaction) {
-    feedController.send(reaction: reaction)
+    feedController.send(reaction: reaction,
+                        feed: Feed(id: "1", title: "Hello"),
+                        token: coordinator.session.token)
   }
 }
 

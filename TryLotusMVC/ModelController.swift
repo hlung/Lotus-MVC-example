@@ -41,7 +41,7 @@ class FeedController {
     self.api = api
   }
 
-  func send(reaction: Reaction) {
+  func send(reaction: Reaction, feed: Feed, token: String) {
     // At this point, the UI layer was already updated.
     // What's left to do are...
     // - update array locally
@@ -49,7 +49,8 @@ class FeedController {
     // - wait for API failure and undo if needed
     update(with: reaction)
 
-    let request = URLRequest(url: URL(string: "www.myapp.com/feed/123/reaction.json")!)
+    var request = URLRequest(url: URL(string: "www.myapp.com/feed/\(feed.id)/reaction.json")!)
+    request.addValue(token, forHTTPHeaderField: "Token Bearer")
     self.api.send(request: request) { [weak self] (response) in
       guard let weakSelf = self else { return }
 

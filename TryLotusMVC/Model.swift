@@ -27,3 +27,12 @@ struct FeedRequest: Pageable {
   let sort: Int
   var pagination: Int
 }
+
+struct PostLikeRequest {
+  let id: Int
+  let token: String
+}
+
+//protocol URLRequestConvertible {
+//  var getRequest: URLRequest
+//}

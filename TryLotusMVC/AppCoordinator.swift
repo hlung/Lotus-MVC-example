@@ -5,6 +5,7 @@ class AppCoordinator {
   let window: UIWindow
   let navigationController: UINavigationController
   let api: APIController
+  let session: Session
   let actionController: ActionController
 
   init() {
@@ -12,6 +13,8 @@ class AppCoordinator {
     actionController = ActionController()
     navigationController = UINavigationController()
     window = UIWindow()
+    session = Session()
+    session.delegate = self
 
     let firstViewController = FeedViewController(coordinator: self)
     navigationController.setViewControllers([firstViewController], animated: false)
@@ -27,6 +30,12 @@ class AppCoordinator {
     }
   }
 
+}
+
+extension AppCoordinator: SessionDelegate {
+  func sessionDidUpdate(_ session: Session) {
+    // do stuff
+  }
 }
 
 enum Navigation {

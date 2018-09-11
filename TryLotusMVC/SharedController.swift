@@ -55,14 +55,17 @@ class ActionController {
 
 // MARK: -
 
-protocol SessionControllerDelegate: class {
-  func sessionControllerDidUpdate(_ controller: SessionController)
+protocol SessionDelegate: class {
+  func sessionDidUpdate(_ session: Session)
 }
 
-class SessionController {
+class Session {
+
+  weak var delegate: SessionDelegate? // TODO: can be a multicast delegate
+
   var token: String = "" {
     didSet {
-      // save token
+      // save token, notify of update
     }
   }
 
